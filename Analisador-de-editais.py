@@ -1,3 +1,29 @@
+import requests
+
+# url base do concurso(exemplo hipotético)
+url = "https://api.concursos.exemplo.com/v1/abertos"
+
+# headers para autenticação(se necessário)
+headers = {
+    "authorization":"BEARER SUA_CHAVE_API"
+    "Content-Type":"application/json"
+}
+
+try:
+    # Realiza a requisição GET
+    response = requests.get(url, headers=headers)
+
+#Verifica se a requisição foi bem sucedida(Status 200)
+if response.status_code == 200:
+    dados = response.json()
+# Processar os dados(ex:Printar concursos)
+for concursos in dados['concursos']:
+    print(f"Concurso: {concurso['nome']} Banca: {concurso['banca'}")
+else:
+    print(f"Erro na API {response.status_code}")
+except Exception as e:
+    print(f"Ocorreu um erro: {e}")
+
 def analisar_proximidade(status):
     # Usar um dicionário para mapear pontos e mensagens melhora a manutenção
     etapas = {
